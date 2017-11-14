@@ -56,7 +56,7 @@ const notify = (() => {
 const processPushUserid = function(){
     $qsa('.push-userid').forEach(pushUserid => {
         const userid = pushUserid.innerHTML.trim(); //此則推文id
-        pushUserid.classList.add('pwe-userid-'+userid);
+        pushUserid.dataset.userid = userid;
     });
 };
 
@@ -153,7 +153,7 @@ const highlightPush = (function(){
         removeHl();
 
         //新增高亮度
-        $qsa('.pwe-userid-'+userid).forEach(userid => {
+        $qsa(`[data-userid="${userid}"]`).forEach(userid => {
             userid.parentElement.classList.add('pwe-highlight-push');
         });
 
@@ -430,7 +430,7 @@ const highlightPosterUserid = function(){
 
     //把文章作者的箭頭加上class
     if (posterUserid) {
-        $qsa('.pwe-userid-'+posterUserid).forEach(userid => {
+        $qsa(`[data-userid="${posterUserid}"]`).forEach(userid => {
             const pushTag = $qs('.push-tag', userid.parentElement);
             pushTag.classList.add('pwe-poster-push-tag');
         });
